@@ -63,6 +63,7 @@ export function DevfileSearch(): JSX.Element {
                 resetPage: true,
               });
             }}
+            data-testid="devfile-search"
           />
         </div>
         <div className="mt-4 flex items-center justify-between sm:mt-0 sm:justify-start">
@@ -73,8 +74,9 @@ export function DevfileSearch(): JSX.Element {
               onClick={(): void => {
                 dispatch({ type: 'CLEAR_FILTERS' });
               }}
+              data-testid="clear-filters"
             >
-              Clear filter(s)
+              {query.filtersApplied === 1 ? 'Clear filter' : 'Clear filters'}
             </button>
           )}
           <div className="pr-8">
@@ -99,6 +101,7 @@ export function DevfileSearch(): JSX.Element {
                 });
               }}
               className="pr-4"
+              data-testid="previous-page"
             >
               <ChevronLeftIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
             </Link>
@@ -111,6 +114,7 @@ export function DevfileSearch(): JSX.Element {
                   payload: nextPage,
                 });
               }}
+              data-testid="next-page"
             >
               <ChevronRightIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
             </Link>
@@ -119,7 +123,7 @@ export function DevfileSearch(): JSX.Element {
       </div>
       <Popover className="relative mt-4 lg:hidden">
         <div className="flex justify-between">
-          <Popover.Button className="flex items-center">
+          <Popover.Button className="flex items-center" data-testid="filter-popover">
             <FunnelIcon className="h-5 w-auto pr-1 text-slate-500 dark:text-slate-400" />
             <span className="text-devfile text-sm font-semibold uppercase tracking-wider">
               {query.filtersApplied !== 0
@@ -134,8 +138,9 @@ export function DevfileSearch(): JSX.Element {
               onClick={(): void => {
                 dispatch({ type: 'CLEAR_FILTERS' });
               }}
+              data-testid="clear-filters"
             >
-              Clear filter(s)
+              {query.filtersApplied === 1 ? 'Clear filter' : 'Clear filters'}
             </button>
           )}
         </div>

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import slugify from '@sindresorhus/slugify';
 import { useEffect, useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import {
@@ -63,11 +64,24 @@ export function ThemeSelector(props: ThemeSelectorProps): JSX.Element {
       <Listbox.Button
         className="flex h-6 w-6 items-center justify-center rounded-lg shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5"
         aria-label={selectedTheme?.name}
+        data-testid="theme-selector"
       >
-        <LightIcon className="hidden h-4 w-4 fill-sky-400 [[data-theme=light]_&]:block" />
-        <DarkIcon className="hidden h-4 w-4 fill-sky-400 [[data-theme=dark]_&]:block" />
-        <LightIcon className="hidden h-4 w-4 fill-slate-400 [:not(.dark)[data-theme=system]_&]:block" />
-        <DarkIcon className="hidden h-4 w-4 fill-slate-400 [.dark[data-theme=system]_&]:block" />
+        <LightIcon
+          className="hidden h-4 w-4 fill-sky-400 [[data-theme=light]_&]:block"
+          data-testid="theme-selector-light"
+        />
+        <DarkIcon
+          className="hidden h-4 w-4 fill-sky-400 [[data-theme=dark]_&]:block"
+          data-testid="theme-selector-dark"
+        />
+        <LightIcon
+          className="hidden h-4 w-4 fill-slate-400 [:not(.dark)[data-theme=system]_&]:block"
+          data-testid="theme-selector-system"
+        />
+        <DarkIcon
+          className="hidden h-4 w-4 fill-slate-400 [.dark[data-theme=system]_&]:block"
+          data-testid="theme-selector-system"
+        />
       </Listbox.Button>
       <Listbox.Options
         className={clsx(
@@ -80,6 +94,7 @@ export function ThemeSelector(props: ThemeSelectorProps): JSX.Element {
             key={theme.value}
             value={theme}
             className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-400 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 flex cursor-pointer select-none items-center rounded-[0.625rem] p-1"
+            data-testid={`theme-selector-${slugify(theme.value)}`}
           >
             <div className="rounded-md bg-white p-1 shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
               <theme.icon className="ui-selected:fill-sky-400 ui-selected:dark:fill-sky-400 ui-not-selected:fill-slate-400 h-4 w-4" />

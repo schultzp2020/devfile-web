@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import slugify from '@sindresorhus/slugify';
 import Link from 'next/link';
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
@@ -40,6 +41,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
       <Menu.Button
         className="flex h-6 items-center rounded-lg px-3 text-sm font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:text-slate-400 dark:ring-inset dark:ring-white/5"
         aria-label={selectedVersion}
+        data-testid="version-selector"
       >
         <span className="pr-2">{selectedVersion}</span>
         <ChevronDownIcon className="h-4 w-auto" />
@@ -59,6 +61,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
                   version !== selectedVersion,
               },
             )}
+            data-testid={`version-selector-${slugify(version)}`}
           >
             {version}
           </Menu.Item>

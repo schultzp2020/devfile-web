@@ -49,6 +49,7 @@ export function MobileNavigation(): JSX.Element {
         onClick={(): void => setIsOpen(true)}
         className="relative"
         aria-label="Open navigation"
+        data-testid="mobile-navigation-open"
       >
         <Bars3Icon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
       </button>
@@ -64,10 +65,17 @@ export function MobileNavigation(): JSX.Element {
               type="button"
               onClick={(): void => setIsOpen(false)}
               aria-label="Close navigation"
+              data-testid="mobile-navigation-close"
             >
               <CloseIcon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
             </button>
-            <Link href="/" className="ml-6" aria-label="Home page" passHref>
+            <Link
+              href="/"
+              className="ml-6"
+              aria-label="Home page"
+              passHref
+              data-testid="mobile-navigation-devfile-icon"
+            >
               <DevfileIcon className="fill-devfile h-9 w-9" />
             </Link>
           </div>

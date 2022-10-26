@@ -59,6 +59,20 @@ export function DevfileFilters(
             </li>
           ),
       )}
+      <li>
+        {query.filtersApplied > 0 && (
+          <button
+            type="button"
+            className="text-devfile ml-2 text-sm font-semibold uppercase tracking-wider"
+            onClick={(): void => {
+              dispatch({ type: 'CLEAR_FILTERS' });
+            }}
+            data-testid="clear-filters"
+          >
+            {query.filtersApplied === 1 ? 'Clear filter' : 'Clear filters'}
+          </button>
+        )}
+      </li>
     </ul>
   );
 }

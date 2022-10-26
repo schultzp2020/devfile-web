@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import slugify from '@sindresorhus/slugify';
 import clsx from 'clsx';
 import { useState, useId } from 'react';
 import type { FilterElement } from '../../hooks';
@@ -66,6 +67,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                     onFilter(newFilterElements);
                   }}
                   className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 rounded border-slate-300 dark:border-slate-700"
+                  data-testid={`filter-${slugify(name)}-${slugify(filterElement.name)}`}
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -85,12 +87,20 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
       {filterElements.length >= checkboxesToDisplay && (
         <div className="text-devfile mt-2 ml-2">
           {!seeMore && (
-            <button type="button" onClick={(): void => setSeeMore(true)}>
+            <button
+              type="button"
+              onClick={(): void => setSeeMore(true)}
+              data-testid="filter-see-more"
+            >
               See more
             </button>
           )}
           {seeMore && (
-            <button type="button" onClick={(): void => setSeeMore(false)}>
+            <button
+              type="button"
+              onClick={(): void => setSeeMore(false)}
+              data-testid="filter-see-less"
+            >
               See less
             </button>
           )}

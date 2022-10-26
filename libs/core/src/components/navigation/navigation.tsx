@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import slugify from '@sindresorhus/slugify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
@@ -48,6 +49,7 @@ export function Navigation(props: NavigationProps): JSX.Element {
                         ? 'before:bg-devfile text-devfile font-semibold'
                         : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300',
                     )}
+                    data-testid={`navigation-link-${slugify(link.title)}`}
                   >
                     {link.title}
                   </Link>

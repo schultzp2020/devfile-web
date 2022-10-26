@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import slugify from '@sindresorhus/slugify';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
@@ -59,7 +60,13 @@ export function Header(props: HeaderProps): JSX.Element {
     >
       <div className="flex max-w-screen-2xl grow flex-wrap items-center justify-between">
         <div className="my-2 flex items-center">
-          <Link href="/" aria-label="Home page" passHref className="flex items-center pr-4">
+          <Link
+            href="/"
+            aria-label="Home page"
+            passHref
+            className="flex items-center pr-4"
+            data-testid="header-devfile-icon"
+          >
             <DevfileIcon className="fill-devfile h-9 w-auto pr-2" />
             <h3 className="hidden pr-2 text-xl font-semibold text-slate-700 dark:text-sky-100 sm:block">
               {websiteName}
@@ -71,13 +78,12 @@ export function Header(props: HeaderProps): JSX.Element {
         <div className="my-2 flex grow items-center justify-end gap-4 lg:hidden">
           {isLandingPage && <LandingPageSearch />}
           <Popover className="relative flex items-center">
-            <Popover.Button>
+            <Popover.Button data-testid="header-navigation-popover">
               <EllipsisVerticalIcon
                 className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400"
                 aria-hidden="true"
               />
             </Popover.Button>
-
             <Popover.Panel className="absolute right-0 top-full z-50 mt-4 w-screen max-w-[250px] rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
               <div className="flex flex-col gap-4">
                 {headerNavigation.map((item) => (
@@ -86,6 +92,7 @@ export function Header(props: HeaderProps): JSX.Element {
                     href={item.href}
                     aria-label={item.name}
                     className="whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300"
+                    data-testid={`header-navigation-${slugify(item.name)}`}
                   >
                     {item.name}
                   </Link>
@@ -108,6 +115,7 @@ export function Header(props: HeaderProps): JSX.Element {
               href={item.href}
               aria-label={item.name}
               className="whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300"
+              data-testid={`header-navigation-${item.name}`}
             >
               {item.image ? (
                 <item.image className="h-6 w-auto fill-slate-500 hover:fill-slate-800 dark:fill-slate-400 dark:hover:fill-slate-300" />
